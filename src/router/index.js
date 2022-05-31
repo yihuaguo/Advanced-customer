@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Page1 from '../pages/Page1.vue'
 import Page2 from '../pages/Page2.vue'
+import Page3 from '../pages/Page3.vue'
 
 const routes = [
     {
@@ -17,11 +18,19 @@ const routes = [
         meta: {
             title: '页面2'
         }
+    }, {
+        path: "/page3",
+        name: "page3",
+        component: Page3,
+        meta: {
+            title: '页面3'
+        }
     }
 ]
 
 const router = createRouter({
     history: createWebHashHistory(),
+    scrollBehavior: () => ({ y: 0 }), // 路由跳转后回到顶部
     routes,
 })
 

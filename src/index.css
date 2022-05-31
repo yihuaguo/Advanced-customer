@@ -1,4 +1,8 @@
-// 版心
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 版心 */
 .wrapper {
     max-width: 1200px;
     padding: 0 20px;
@@ -25,6 +29,7 @@ h6 {
 
 ul {
     list-style: none;
+    margin-bottom: 0;
     padding: 0;
 }
 

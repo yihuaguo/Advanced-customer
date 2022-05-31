@@ -70,6 +70,7 @@ header {
       &>ul {
         display: flex;
         align-items: center;
+        margin-bottom: 0;
 
         &>li {
           color: white;
@@ -85,6 +86,7 @@ header {
     &>ul.shareBox {
       display: flex;
       align-items: center;
+      margin-bottom: 0;
 
       &>li {
         margin-left: 10px;

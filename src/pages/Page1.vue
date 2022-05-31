@@ -1,5 +1,5 @@
 <template>
-    <P>page1</P>
+    <p>page1</p>
     <a-card title="数据流">
         <!-- template里面可以直接拿到store数据 -->
         <div>{{ $store.state.count }}</div>
