@@ -1,10 +1,11 @@
 <template>
     <a-card title="钱包操作">
         <p>page2</p>
-        <button @click="handleGetAddress">获取账户地址</button>
-        <button @click="handleChainId">获取当前链id</button>
-        <button @click="handleApprove">获取签名</button>
+        <button @click="handleGetAddress">获取地址</button>
+        <button @click="handleChainId">获取当前网络</button>
+        <button @click="hadnleChangeChain">切换网络</button>
         <button @click="handleGetEth">获取账户余额</button>
+        <button @click="handleApprove">获取签名</button>
     </a-card>
     <a-card title="storage缓存">
         <button @click="add">新增缓存</button>
@@ -21,10 +22,11 @@
 <script>
 import { useStorage } from 'vue3-storage';
 import {
-    Approve,
-    chainId,
+    approve,
+    getChain,
     getAddress,
-    getEth
+    getEth,
+    changeChain,
 } from '../utils/web3'
 
 export default {
@@ -45,7 +47,7 @@ export default {
         }
 
         const handleApprove = async () => {
-            const result = await Approve()
+            const result = await approve()
             if (result) {
                 console.log(result)
             } else {
@@ -54,7 +56,16 @@ export default {
         }
 
         const handleChainId = async () => {
-            const result = await chainId()
+            const result = await getChain()
+            if (result) {
+                console.log(result)
+            } else {
+                console.log('err')
+            }
+        }
+
+        const hadnleChangeChain = async () => {
+            const result = await changeChain()
             if (result) {
                 console.log(result)
             } else {
@@ -86,7 +97,8 @@ export default {
             handleApprove,
             handleChainId,
             handleGetAddress,
-            handleGetEth
+            handleGetEth,
+            hadnleChangeChain,
         }
     }
 }

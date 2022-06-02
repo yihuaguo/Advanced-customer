@@ -1,5 +1,4 @@
 <template>
-    <p>page1</p>
     <a-card title="数据流">
         <!-- template里面可以直接拿到store数据 -->
         <div>{{ $store.state.count }}</div>
@@ -45,8 +44,6 @@ export default {
         const router = useRoute()
         // 路由操作
         const routers = useRouter()
-        console.log('router', router)
-        console.log('routers', routers)
 
         const { locale } = useI18n()
 

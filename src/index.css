@@ -11,8 +11,7 @@
 }
 
 html {
-    line-height: 1.15;
-    -webkit-text-size-adjust: 100%
+    font-size: 16px;
 }
 
 body,
