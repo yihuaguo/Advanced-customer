@@ -6,9 +6,7 @@
         <button @click="hadnleChangeChain">切换网络</button>
         <button @click="handleGetEth">获取账户余额</button>
         <button @click="handleApprove">获取签名</button>
-    </a-card>
-    <a-card title="storage缓存">
-        <button @click="add">新增缓存</button>
+        <button @click="handleContract">调用合约方法</button>
     </a-card>
     <a-card class="其他">
         <p>图片懒加载</p>
@@ -20,31 +18,21 @@
 </template>
 
 <script>
-import { useStorage } from 'vue3-storage';
 import {
     approve,
     getChain,
     getAddress,
     getEth,
     changeChain,
-} from '../utils/web3'
+} from '@/utils/web3'
+import { test1 } from '@/utils/contract'
 
 export default {
     setup() {
-        const storage = useStorage()
         const list = [
             'src/assets/icon/airplane1.png',
             'src/assets/icon/airplane.png',
         ]
-
-        const add = () => {
-            storage.setStorage({
-                key: "name1",
-                data: "1",
-                success: () => { }
-            });
-            storage.setStorageSync('name2', '2', 60)
-        }
 
         const handleApprove = async () => {
             const result = await approve()
@@ -65,7 +53,7 @@ export default {
         }
 
         const hadnleChangeChain = async () => {
-            const result = await changeChain()
+            const result = await changeChain(4)
             if (result) {
                 console.log(result)
             } else {
@@ -91,14 +79,22 @@ export default {
             }
         }
 
+        const handleContract = async () => {
+            test1().then(res => {
+                console.log('res', res)
+            }).catch(err => {
+                console.log('err', err)
+            })
+        }
+
         return {
             list,
-            add,
             handleApprove,
             handleChainId,
             handleGetAddress,
             handleGetEth,
             hadnleChangeChain,
+            handleContract
         }
     }
 }

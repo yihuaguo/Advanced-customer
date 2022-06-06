@@ -1,5 +1,5 @@
 import { createI18n } from 'vue-i18n'
-import messages from '../locales/index'
+import messages from '@/locales/index'
 
 const i18n = createI18n({
     locale: 'zh',

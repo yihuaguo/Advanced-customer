@@ -5,19 +5,26 @@ const store = createStore({
     // 根store的数据方法
     state() {
         return {
-            count: 0
+            count: 0,
+            // 账户信息
+            userInfo: {
+                address: '', // 账户地址
+                chain: '' // 当前链
+            }
         }
     },
     // getters方法可以自定义逻辑获取vuex的state
     getters: {
-        getCount(state) {
-            return state.count + 1
-        }
+        getCount: (state) => state.count + 1,
+        getUserInfo: (state) => state.userInfo
     },
     // 修改vuex的state值只有通过motations方法
     mutations: {
         increment(state, payload) {
             state.count += payload.count
+        },
+        setUserInfo(state, payload) {
+            state.userInfo = payload
         }
     },
     // mutation进行同步操作，异步操作使用actions

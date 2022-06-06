@@ -32,7 +32,7 @@
 import { useStore } from 'vuex'
 import { useRoute, useRouter } from "vue-router"
 import { useI18n } from 'vue-i18n'
-import { getData } from '../services/test'
+import { getData } from '@/utils/services/test'
 
 export default {
     setup() {

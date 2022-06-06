@@ -3,4 +3,5 @@
 # antd design vue + less
 # vue-i18n 国际化
 # axios 请求
-# Aos 动画库
+# good-storage 本地缓存
+# Aos + kinesis 动效

@@ -1,6 +1,6 @@
 import Web3 from 'web3/dist/web3.min.js';
 import { message } from 'ant-design-vue'
-import netWorkConfig from '../config/netWork'
+import netWorkConfig from '@/config/netWork'
 
 const web3 = (window.ethereum && new Web3(window.ethereum)) || null
 
@@ -24,7 +24,7 @@ export const getChain = async () => {
 }
 
 // 切换网络
-export const changeChain = async (id = 4) => {
+export const changeChain = async (id = 1) => {
     if (noMetaMask()) return
     // 成功状态
     let pass = true
