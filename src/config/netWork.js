@@ -3,7 +3,7 @@ import Web3 from "web3/dist/web3.min"
 const netWorkConfig = {
     "1": {
         chainId: Web3.utils.numberToHex(1), // 目标链ID
-        chainName: 'Mainnet Ether', // 网络名称
+        chainName: 'Mainnet', // 网络名称
         nativeCurrency: {
             name: 'ETH',
             symbol: 'ETH',
@@ -14,7 +14,7 @@ const netWorkConfig = {
     },
     "3": {
         chainId: Web3.utils.numberToHex(3),
-        chainName: 'Ropsten Ether',
+        chainName: 'Ropsten',
         nativeCurrency: {
             name: 'ETH',
             symbol: 'ETH',
@@ -25,7 +25,7 @@ const netWorkConfig = {
     },
     "4": {
         chainId: Web3.utils.numberToHex(4),
-        chainName: 'Rinkeby Ether',
+        chainName: 'Rinkeby',
         nativeCurrency: {
             name: 'ETH',
             symbol: 'ETH',
@@ -36,7 +36,7 @@ const netWorkConfig = {
     },
     "5": {
         chainId: Web3.utils.numberToHex(5),
-        chainName: 'Goerli Ether',
+        chainName: 'Goerli',
         nativeCurrency: {
             name: 'ETH',
             symbol: 'ETH',
@@ -47,7 +47,7 @@ const netWorkConfig = {
     },
     "42": {
         chainId: Web3.utils.numberToHex(42),
-        chainName: 'Kovan Ether',
+        chainName: 'Kovan',
         nativeCurrency: {
             name: 'ETH',
             symbol: 'ETH',

@@ -3,17 +3,11 @@
     <div class="wrapper">
       <div class="logoRouterBox">
         <img src="../assets/icon/logo.png" data-aos="fade-down" data-aos-delay="100" />
-        <ul>
-          <li data-aos="fade-down" data-aos-delay="100">Home</li>
-          <li data-aos="fade-down" data-aos-delay="200">Home2</li>
-          <li data-aos="fade-down" data-aos-delay="300">Home3</li>
-          <li data-aos="fade-down" data-aos-delay="400">Home4</li>
-        </ul>
       </div>
-      <div class="wallet">
+      <div>
         <button @click="handleLogin">
           {{ isLogin ? $store.state.userInfo.address : 'connect wallet' }} - ({{
-          $store.state.userInfo.chain
+              $store.state.userInfo.chain
           }})
         </button>
       </div>
@@ -26,6 +20,7 @@ import { useStore } from "vuex";
 import { getAddress, getChain } from "@/utils/web3";
 import { ref, onMounted } from "vue";
 import { message } from "ant-design-vue";
+import { getChainName } from '@/utils/other'
 
 export default {
   setup() {
@@ -36,7 +31,7 @@ export default {
     onMounted(async () => {
       console.log("window.ethereum", window.ethereum);
       const currentAddress = window.ethereum.selectedAddress;
-      const currentChain = await getChain();
+      const currentChain = getChainName(await getChain());
       store.commit("setUserInfo", {
         address: currentAddress || "",
         chain: currentChain
@@ -54,7 +49,7 @@ export default {
       // 监控网络切换
       window.ethereum.on("chainChanged", async () => {
         const userInfo = store.getters.getUserInfo;
-        const chain = await getChain();
+        const chain = getChainName(await getChain());
         store.commit("setUserInfo", {
           ...userInfo,
           chain
@@ -69,7 +64,7 @@ export default {
       } else {
         const address = await getAddress();
         if (address) {
-          const chain = await getChain();
+          const chain = getChainName(await getChain());
           store.commit("setUserInfo", {
             address,
             chain
@@ -96,39 +91,22 @@ header {
   top: 0;
   z-index: 99;
 
-  & > div.wrapper {
+  &>div.wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 72px;
 
-    & > div.logoRouterBox {
+    &>div.logoRouterBox {
       display: flex;
       align-items: center;
 
-      & > img {
+      &>img {
         width: 100px;
         margin-right: 20px;
       }
-
-      & > ul {
-        display: flex;
-        align-items: center;
-        margin-bottom: 0;
-
-        & > li {
-          color: white;
-          margin-right: 10px;
-
-          &:last-child {
-            margin-right: 0;
-          }
-        }
-      }
     }
 
-    & > div.wallet {
-    }
   }
 }
 </style>
