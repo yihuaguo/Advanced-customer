@@ -24,11 +24,15 @@
         <button @click="changeLang('en')">英文</button>
     </a-card>
 
-    <div style="height: 500px"></div>
+    <a-card title="虚拟dom">
+    </a-card>
+
+    <div class="aaa" style="height: 500px"></div>
 
 </template>
 
 <script>
+import { h } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute, useRouter } from "vue-router"
 import { useI18n } from 'vue-i18n'
@@ -38,7 +42,6 @@ export default {
     setup() {
         // setup里面要拿到vuex数据要使用钩子
         const store = useStore()
-        console.log('store', store)
 
         // 路由信息
         const router = useRoute()
@@ -98,7 +101,7 @@ export default {
             handleUserActions,
             goPage2,
             fetch,
-            changeLang
+            changeLang,
         }
     }
 }
@@ -106,4 +109,11 @@ export default {
 </script>
 
 <style lang="less" scoped>
+div.aaa {
+    background: url(@/assets/icon/camera.png);
+}
+
+p.red {
+    color: red;
+}
 </style>

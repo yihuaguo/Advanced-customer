@@ -28,6 +28,9 @@
     "less-loader": "^11.0.0",
     "sass-resources-loader": "^2.2.5",
     "unplugin-vue-components": "^0.19.5",
-    "vite": "^2.9.9"
+    "vite": "^2.9.9",
+    "vite-plugin-compression": "^0.5.1",
+    "vite-plugin-optimize-persist": "^0.1.2",
+    "vite-plugin-package-config": "^0.1.1"
   }
 }

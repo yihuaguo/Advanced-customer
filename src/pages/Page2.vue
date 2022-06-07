@@ -26,12 +26,14 @@ import {
     changeChain,
 } from '@/utils/web3'
 import { test1 } from '@/utils/contract'
+import airplane from '@/assets/icon/airplane.png'
 
 export default {
     setup() {
+        // script里非打包的静态资源路径需要绝对路径或者import引入
         const list = [
-            'src/assets/icon/airplane1.png',
-            'src/assets/icon/airplane.png',
+            airplane,
+            '/src/assets/icon/airplane1.png',
         ]
 
         const handleApprove = async () => {
