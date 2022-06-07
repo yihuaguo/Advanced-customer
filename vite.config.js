@@ -5,7 +5,6 @@ import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers';
 import PkgConfig from 'vite-plugin-package-config'
 import OptimizationPersist from 'vite-plugin-optimize-persist'
 import viteCompression from 'vite-plugin-compression'
-
 const { resolve } = require('path')
 
 // https://vitejs.dev/config/
@@ -69,7 +68,7 @@ export default defineConfig({
     alias: {
       '@': resolve(__dirname, "src"),
       '@utils': resolve(__dirname, "src/utils"),
-      '@assets': resolve(__dirname, "src/assets")
+      '@assets': resolve(__dirname, "src/assets"),
     }
   }
 })

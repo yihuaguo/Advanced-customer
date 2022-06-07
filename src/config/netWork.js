@@ -1,4 +1,4 @@
-import Web3 from "web3/dist/web3.min"
+import Web3 from 'web3/dist/web3.min.js';
 
 const netWorkConfig = {
     "1": {

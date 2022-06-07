@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import Web3 from 'web3/dist/web3.min.js';
-import imageLazy from './directive'
+import globalDirective from './directive'
 import App from './App.vue'
 import store from './store'
 import router from './router'
@@ -13,7 +13,7 @@ const app = createApp(App)
 app.config.globalProperties.$Web3 = Web3
 app.config.globalProperties.$storage = localStorage
 app.use(router)
-app.use(store)
-app.use(i18n)
-app.use(imageLazy)
-app.mount('#app')
+    .use(store)
+    .use(i18n)
+    .use(globalDirective)
+    .mount('#app')
