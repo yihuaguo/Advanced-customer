@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* 版心 */
 .wrapper {
     max-width: 1200px;

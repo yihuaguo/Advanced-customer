@@ -1,7 +1,7 @@
 <template>
     <a-card title="数据流">
         <!-- template里面可以直接拿到store数据 -->
-        <div>{{ $store.state.count }}</div>
+        <div class="text-3xl text-orange-500">{{ $store.state.count }}</div>
         <button @click="handleGetters">getters</button>
         <button @click="handleMutations">mutations</button>
         <button @click="handleActions">actions</button>
@@ -24,15 +24,11 @@
         <button @click="changeLang('en')">英文</button>
     </a-card>
 
-    <a-card title="虚拟dom">
-    </a-card>
-
-    <div class="aaa" style="height: 500px"></div>
+    <div style="height: 500px"></div>
 
 </template>
 
 <script>
-import { h } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute, useRouter } from "vue-router"
 import { useI18n } from 'vue-i18n'
@@ -109,10 +105,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-div.aaa {
-    background: url(@/assets/icon/camera.png);
-}
-
 p.red {
     color: red;
 }

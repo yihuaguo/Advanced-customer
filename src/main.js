@@ -6,8 +6,8 @@ import store from './store'
 import router from './router'
 import i18n from './config/i18n'
 import localStorage from './utils/stroage'
-import './index.css'
 import 'ant-design-vue/dist/antd.less'
+import './index.css'
 
 const app = createApp(App)
 app.config.globalProperties.$Web3 = Web3

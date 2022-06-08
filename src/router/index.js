@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import Page1 from '../pages/Page1.vue'
 import Page2 from '../pages/Page2.vue'
 import Page3 from '../pages/Page3.vue'
+import Page4 from '../pages/Page4.vue'
 
 const routes = [
     {
@@ -24,6 +25,13 @@ const routes = [
         component: Page3,
         meta: {
             title: '页面3'
+        }
+    }, {
+        path: "/page4",
+        name: "page4",
+        component: Page4,
+        meta: {
+            title: '页面4'
         }
     }
 ]

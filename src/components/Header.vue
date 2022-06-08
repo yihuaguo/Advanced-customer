@@ -29,7 +29,7 @@ export default {
 
     // 判断钱包连接-监控钱包
     onMounted(async () => {
-      console.log("window.ethereum", window.ethereum);
+      // console.log("window.ethereum", window.ethereum);
       const currentAddress = window.ethereum.selectedAddress;
       const currentChain = getChainName(await getChain());
       store.commit("setUserInfo", {
