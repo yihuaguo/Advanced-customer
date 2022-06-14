@@ -5,6 +5,7 @@ import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers';
 import PkgConfig from 'vite-plugin-package-config'
 import OptimizationPersist from 'vite-plugin-optimize-persist'
 import viteCompression from 'vite-plugin-compression'
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 const { resolve } = require('path')
 
 // https://vitejs.dev/config/
@@ -38,6 +39,24 @@ export default defineConfig({
     Components({
       resolvers: [AntDesignVueResolver()],
     }),
+    createSvgIconsPlugin({
+      // 指定需要缓存的图标文件夹
+      iconDirs: [resolve(process.cwd(), 'src/assets/svg')],
+      // 指定symbolId格式
+      symbolId: 'icon-[dir]-[name]',
+
+      /**
+       * 自定义插入位置
+       * @default: body-last
+       */
+      // inject?: 'body-last' | 'body-first'
+
+      /**
+       * custom dom id
+       * @default: __svg__icons__dom__
+       */
+      // customDomId: '__svg__icons__dom__',
+    }),
     PkgConfig(),
     OptimizationPersist(),
     // 前端资源压缩打包，需要服务器支持
@@ -60,7 +79,8 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       less: {
-        javascriptEnabled: true
+        javascriptEnabled: true,
+        additionalData: `@import "${resolve(__dirname, 'src/styles/theme.less')}";`
       }
     }
   },

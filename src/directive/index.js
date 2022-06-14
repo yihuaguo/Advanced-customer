@@ -1,6 +1,6 @@
 import { message } from 'ant-design-vue'
-import lazyLoading from '@/assets/icon/imgLoading.gif'
-import lazyErr from '@/assets/icon/imgErr.png'
+import lazyLoading from '@/assets/images/imgLoading.gif'
+import lazyErr from '@/assets/images/imgErr.png'
 
 // 全局指令
 const defineDirective = (app) => {

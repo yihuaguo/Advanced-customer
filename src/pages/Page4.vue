@@ -4,8 +4,8 @@
 </template>
 
 <script>
-import Button from '@/components/business_components/Button.vue'
-import Input from '@/components/business_components/Input.vue'
+import Button from '@/components/base_components/Button.vue'
+import Input from '@/components/base_components/Input.vue'
 import { ref } from 'vue'
 
 export default {

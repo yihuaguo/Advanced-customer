@@ -8,6 +8,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@splidejs/splide-extension-auto-scroll": "^0.4.2",
+    "@splidejs/vue-splide": "^0.6.7",
     "ant-design-vue": "^3.2.5",
     "aos": "^2.3.4",
     "axios": "^0.27.2",
@@ -35,6 +37,7 @@
     "vite": "^2.9.9",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-optimize-persist": "^0.1.2",
-    "vite-plugin-package-config": "^0.1.1"
+    "vite-plugin-package-config": "^0.1.1",
+    "vite-plugin-svg-icons": "^2.0.1"
   }
 }

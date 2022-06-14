@@ -32,6 +32,11 @@ ul {
     padding: 0;
 }
 
+@font-face {
+    font-family: "WORKSANS-BOLD";
+    src: url('../assets/fonts/WORKSANS-BOLD.TTF');
+}
+
 a,
 a:active,
 a:link,

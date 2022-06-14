@@ -1,8 +1,8 @@
 <script>
 import AOS from "aos";
 import 'aos/dist/aos.css';
-import Header from './components/Header.vue'
-import Footer from './components/Footer.vue'
+import Header from '@/components/layout_components/Header.vue'
+import Footer from '@/components/layout_components/Footer.vue'
 
 export default {
   components: {

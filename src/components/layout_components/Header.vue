@@ -2,7 +2,7 @@
   <header>
     <div class="wrapper">
       <div class="logoRouterBox">
-        <img src="@/assets/icon/logo.png" data-aos="fade-down" data-aos-delay="100" />
+        <img src="@/assets/images/logo.png" data-aos="fade-down" data-aos-delay="100" />
       </div>
       <div>
         <button @click="handleLogin">
@@ -20,7 +20,7 @@ import { useStore } from "vuex";
 import { getAddress, getChain } from "@/utils/web3";
 import { ref, onMounted } from "vue";
 import { message } from "ant-design-vue";
-import { getChainName } from '@/utils/other'
+import { getChainName } from '@/utils/custom'
 
 export default {
   setup() {

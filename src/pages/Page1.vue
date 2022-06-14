@@ -1,6 +1,8 @@
 <template>
-    <a-card title="数据流">
+    <a-card title="svg-数据流">
+        <svg-icon name="aboutSU" />
         <!-- template里面可以直接拿到store数据 -->
+        <p class="myFont theme">自定义字体和全局颜色</p>
         <div class="text-3xl text-orange-500">{{ $store.state.count }}</div>
         <button @click="handleGetters">getters</button>
         <button @click="handleMutations">mutations</button>
@@ -23,7 +25,6 @@
         <button @click="changeLang('zh')">中文</button>
         <button @click="changeLang('en')">英文</button>
     </a-card>
-
     <div style="height: 500px"></div>
 
 </template>
@@ -32,7 +33,7 @@
 import { useStore } from 'vuex'
 import { useRoute, useRouter } from "vue-router"
 import { useI18n } from 'vue-i18n'
-import { getData } from '@/utils/services/test'
+import { getData } from '@utils/services/test'
 
 export default {
     setup() {
@@ -54,9 +55,11 @@ export default {
             routers.push('/page2')
         }
 
-        const fetch = () => {
-            getData().then(result => {
-                console.log('result', result)
+        const fetch = async () => {
+            getData().then(res => {
+                console.log('res', res)
+            }).catch(err => {
+                console.log('err', err)
             })
         }
 
@@ -105,7 +108,11 @@ export default {
 </script>
 
 <style lang="less" scoped>
-p.red {
-    color: red;
+.myFont {
+    font-family: "WORKSANS-BOLD";
+}
+
+.theme {
+    color: @base_color;
 }
 </style>
