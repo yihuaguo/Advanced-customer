@@ -7,7 +7,7 @@
 
 <script>
 import { Button } from 'ant-design-vue'
-import _ from 'lodash'
+import { default as debounce } from 'lodash/debounce'
 
 export default {
     components: {
@@ -17,7 +17,7 @@ export default {
     setup(props) {
         const { value = '', loading = false, block = false, shape = "default", size = "middle", disabled = false, type = "default", onClick = () => { } } = props
 
-        const handleClick = _.debounce(() => {
+        const handleClick = debounce(() => {
             onClick()
         }, 200)
 

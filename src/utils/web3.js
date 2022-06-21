@@ -2,7 +2,7 @@ import Web3 from 'web3/dist/web3.min.js';
 import { message } from 'ant-design-vue'
 import netWorkConfig from '@/config/netWork'
 
-const web3 = (window.ethereum && new Web3(window.ethereum)) || null
+export const web3 = (window.ethereum && new Web3(window.ethereum)) || null
 
 // 是否安装mateMask
 export const noMetaMask = () => {
@@ -123,4 +123,5 @@ export default {
     getAddress,
     getEth,
     changeChain,
+    web3
 }
