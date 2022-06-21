@@ -6,7 +6,6 @@ import App from './App.vue'
 import store from './store'
 import router from './router'
 import i18n from './config/i18n'
-import localStorage from './utils/stroage'
 import svgIcon from './components/base_components/SvgIcon.vue'
 import 'virtual:svg-icons-register'
 import 'ant-design-vue/dist/antd.less'
@@ -14,7 +13,6 @@ import './styles/default.css'
 
 const app = createApp(App)
 app.config.globalProperties.$Web3 = Web3
-app.config.globalProperties.$storage = localStorage
 app.use(router)
     .use(store)
     .use(i18n)

@@ -21,6 +21,7 @@ import { getAddress, getChain } from "@/utils/web3";
 import { ref, onMounted } from "vue";
 import { message } from "ant-design-vue";
 import { getChainName } from '@/utils/custom'
+import localeStorage from '@/utils/stroage'
 
 export default {
   setup() {
@@ -31,19 +32,23 @@ export default {
     onMounted(async () => {
       // console.log("window.ethereum", window.ethereum);
       const currentAddress = window.ethereum.selectedAddress;
-      const currentChain = getChainName(await getChain());
+      const currentChain = getChainName(await getChain()) || '未知链名';
       store.commit("setUserInfo", {
         address: currentAddress || "",
         chain: currentChain
       });
+      localeStorage.localPut('currentAddress', currentAddress)
+      localeStorage.localPut('currentChain', currentChain)
       isLogin.value = currentAddress ? true : false;
       // 监控账户切换
       window.ethereum.on("accountsChanged", addressList => {
         const userInfo = store.getters.getUserInfo;
+        const currentAddress = addressList.length ? addressList[0] : ""
         store.commit("setUserInfo", {
           ...userInfo,
-          address: addressList.length ? addressList[0] : ""
+          address: currentAddress
         });
+        localeStorage.localPut('currentAddress', currentAddress)
         isLogin.value = addressList.length ? true : false;
       });
       // 监控网络切换
@@ -54,6 +59,7 @@ export default {
           ...userInfo,
           chain
         });
+        localeStorage.localPut('currentChain', chain)
       });
     });
 

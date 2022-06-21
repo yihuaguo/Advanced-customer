@@ -3,6 +3,7 @@ import Page1 from '../pages/Page1.vue'
 import Page2 from '../pages/Page2.vue'
 import Page3 from '../pages/Page3.vue'
 import Page4 from '../pages/Page4.vue'
+import Page5 from '../pages/Page5.vue'
 
 const routes = [
     {
@@ -32,6 +33,13 @@ const routes = [
         component: Page4,
         meta: {
             title: '页面4'
+        }
+    }, {
+        path: "/page5",
+        name: "page5",
+        component: Page5,
+        meta: {
+            title: '页面5'
         }
     }
 ]

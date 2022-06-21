@@ -4,7 +4,7 @@ import netWorkConfig from '@/config/netWork'
 export const to10_16 = (val) => eval(val).toString(16)
 
 // id取链名
-export const getChainName = (id = 1) => netWorkConfig[id].chainName
+export const getChainName = (id = 1) => netWorkConfig[id]?.chainName || '未知链名'
 
 export default {
     to10_16,

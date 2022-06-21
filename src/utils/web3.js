@@ -40,7 +40,7 @@ export const changeChain = async (id = 1) => {
             // 当前钱包没有该网络，需要新增该网络
             await window.ethereum.request({
                 method: 'wallet_addEthereumChain',
-                params: [netWorkConfig[id]]
+                params: [netWorkConfig[id] || {}]
             }).then(res => { }).catch(e => {
                 message.error('新增网络失败!')
                 pass = false

@@ -6,8 +6,6 @@
         <button @click="hadnleChangeChain">切换网络</button>
         <button @click="handleGetEth">获取账户余额</button>
         <button @click="handleApprove">获取签名</button>
-        <button @click="handleContract">调用合约方法</button>
-        <button @click="handleContract2">调用合约方法2</button>
     </a-card>
     <a-card class="其他">
         <p>图片懒加载</p>
@@ -26,7 +24,6 @@ import {
     getEth,
     changeChain,
 } from '@/utils/web3'
-import { test1, test2 } from '@/utils/contract'
 import airplane from '@/assets/images/airplane.png'
 
 export default {
@@ -82,22 +79,6 @@ export default {
             }
         }
 
-        const handleContract = async () => {
-            test1('name1', '10', 'yihua1').then(res => {
-                console.log('res', res)
-            }).catch(err => {
-                console.log('err', err)
-            })
-        }
-
-        const handleContract2 = async () => {
-            test2('name1').then(res => {
-                console.log('res', res)
-            }).catch(err => {
-                console.log('err', err)
-            })
-        }
-
         return {
             list,
             handleApprove,
@@ -105,8 +86,6 @@ export default {
             handleGetAddress,
             handleGetEth,
             hadnleChangeChain,
-            handleContract,
-            handleContract2
         }
     }
 }
