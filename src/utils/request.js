@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const service = axios.create({
-    baseURL: 'https://www.fastmock.site/mock/e81efc0d06a1c66b2433a1f8e03f82fd/api',
+    baseURL: '/api',
     timeout: 10000
 })
 

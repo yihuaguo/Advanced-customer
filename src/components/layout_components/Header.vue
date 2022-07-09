@@ -1,88 +1,62 @@
 <template>
   <header>
-    <div class="wrapper">
-      <div class="logoRouterBox">
-        <img src="@/assets/images/logo.png" data-aos="fade-down" data-aos-delay="100" />
-      </div>
-      <div>
-        <button @click="handleLogin">
-          {{ isLogin ? $store.state.userInfo.address : 'connect wallet' }} - ({{
-              $store.state.userInfo.chain
-          }})
-        </button>
-      </div>
+    <div class="logoBox">
+      <BookOutlined class="icon" data-aos="fade-down" data-aos-duration="600" />
+      <!-- <span data-aos="fade-down" data-aos-duration="800">前端面试指南</span> -->
+      <span data-aos="fade-down" data-aos-duration="800">指南</span>
     </div>
+    <ul v-if="menuList.length > 0">
+      <li v-for="item, index of menuList" :key="item.id" @click="handleLesson(item.url, item.id)" data-aos="fade-left"
+        :data-aos-delay="(index + 1) * 50" data-aos-duration="1000">{{ item.name }}
+      </li>
+    </ul>
+    <LineLoading v-else />
   </header>
 </template>
 
 <script>
-import { useStore } from "vuex";
-import { getAddress, getChain } from "@/utils/web3";
-import { ref, onMounted } from "vue";
-import { message } from "ant-design-vue";
-import { getChainName } from '@/utils/custom'
-import localeStorage from '@/utils/stroage'
+import {
+  BookOutlined
+} from '@ant-design/icons-vue';
+import { getMenuList } from '@/services/global'
+import { onMounted, ref } from 'vue'
+import { notice } from '@/utils/utils'
+import { useStore } from 'vuex'
+import { useRouter } from "vue-router"
+import LineLoading from '../base_components/lineLoading.vue';
 
 export default {
+  components: {
+    BookOutlined,
+    LineLoading
+  },
   setup() {
-    const isLogin = ref(false);
-    const store = useStore();
 
-    // 判断钱包连接-监控钱包
-    onMounted(async () => {
-      // console.log("window.ethereum", window.ethereum);
-      const currentAddress = window.ethereum.selectedAddress;
-      const currentChain = getChainName(await getChain()) || '未知链名';
-      store.commit("setUserInfo", {
-        address: currentAddress || "",
-        chain: currentChain
-      });
-      localeStorage.localPut('currentAddress', currentAddress)
-      localeStorage.localPut('currentChain', currentChain)
-      isLogin.value = currentAddress ? true : false;
-      // 监控账户切换
-      window.ethereum.on("accountsChanged", addressList => {
-        const userInfo = store.getters.getUserInfo;
-        const currentAddress = addressList.length ? addressList[0] : ""
-        store.commit("setUserInfo", {
-          ...userInfo,
-          address: currentAddress
-        });
-        localeStorage.localPut('currentAddress', currentAddress)
-        isLogin.value = addressList.length ? true : false;
-      });
-      // 监控网络切换
-      window.ethereum.on("chainChanged", async () => {
-        const userInfo = store.getters.getUserInfo;
-        const chain = getChainName(await getChain());
-        store.commit("setUserInfo", {
-          ...userInfo,
-          chain
-        });
-        localeStorage.localPut('currentChain', chain)
-      });
+    const store = useStore()
+    const routers = useRouter()
+    const menuList = ref([])
+
+    const handleLesson = (url, id) => {
+      if (id === store.state.lesson.id) return
+      routers.push(`/lesson${url}`)
+      store.commit('setLesson', { url, id })
+    }
+
+    onMounted(() => {
+      getMenuList().then(res => {
+        menuList.value = res || []
+        if (res && res.length > 0) {
+          const { url, id } = res[0]
+          handleLesson(url, id)
+        }
+      }).catch(() => {
+        notice('warning', '请求错误', '菜单获取错误，请刷新网站或者联系管理员！')
+      })
     });
 
-    // 连接钱包
-    const handleLogin = async () => {
-      if (isLogin.value) {
-        message.info("钱包已连接!");
-      } else {
-        const address = await getAddress();
-        if (address) {
-          const chain = getChainName(await getChain());
-          store.commit("setUserInfo", {
-            address,
-            chain
-          });
-          isLogin.value = true;
-        }
-      }
-    };
-
     return {
-      isLogin,
-      handleLogin
+      menuList,
+      handleLesson
     };
   }
 };
@@ -90,29 +64,56 @@ export default {
 
 <style lang="less" scoped>
 header {
-  width: 100%;
-  height: 72px;
-  background-color: #24242a;
+  padding: 0 20px;
+  height: 80px;
+  box-shadow: 0 2px 8px #f0f1f2;
+  background-color: #d8eefe;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   position: sticky;
   top: 0;
   z-index: 99;
 
-  &>div.wrapper {
+  div.logoBox {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    height: 72px;
+    justify-content: center;
+    cursor: pointer;
 
-    &>div.logoRouterBox {
-      display: flex;
-      align-items: center;
-
-      &>img {
-        width: 100px;
-        margin-right: 20px;
-      }
+    .icon {
+      font-size: 45px;
+      color: #3da9fc;
+      margin-right: 10px;
     }
 
+    span {
+      font-size: 26px;
+      font-weight: 800;
+    }
   }
+
+  ul {
+    list-style: none;
+
+    &>li {
+      float: left;
+      font-size: 20px;
+      font-weight: 800;
+      margin: 0 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      &:hover,
+      &.current {
+        color: #3da9fc;
+      }
+    }
+  }
+
 }
 </style>

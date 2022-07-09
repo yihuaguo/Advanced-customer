@@ -23,7 +23,7 @@ export default {
 <template>
   <Header></Header>
   <router-view></router-view>
-  <Footer></Footer>
+  <!-- <Footer></Footer> -->
 </template>
 
 <style lang="less" scoped>

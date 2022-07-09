@@ -8,24 +8,22 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@splidejs/splide-extension-auto-scroll": "^0.4.2",
-    "@splidejs/vue-splide": "^0.6.7",
+    "@ant-design/icons-vue": "^6.1.0",
+    "@types/nprogress": "^0.2.0",
     "ant-design-vue": "^3.2.5",
     "aos": "^2.3.4",
     "axios": "^0.27.2",
     "good-storage": "^1.1.1",
     "lodash": "^4.17.21",
+    "nprogress": "^0.2.0",
     "vue": "^3.2.25",
     "vue-i18n": "^9.1.10",
-    "vue-kinesis": "^2.0.5",
     "vue-router": "^4.0.15",
-    "vuex": "^4.0.2",
-    "web3": "^1.7.3"
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@types/aos": "^3.0.4",
     "@types/node": "^17.0.36",
-    "@types/web3": "^1.2.2",
     "@vitejs/plugin-vue": "^2.3.3",
     "autoprefixer": "^10.4.7",
     "less": "^4.1.2",

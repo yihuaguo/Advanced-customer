@@ -1,45 +1,21 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Page1 from '../pages/Page1.vue'
-import Page2 from '../pages/Page2.vue'
-import Page3 from '../pages/Page3.vue'
-import Page4 from '../pages/Page4.vue'
-import Page5 from '../pages/Page5.vue'
+import Home from '../pages/Home/index.vue'
+import Lesson from '../pages/Lesson/index.vue'
 
 const routes = [
     {
         path: "/",
-        name: "page1",
-        component: Page1,
+        name: "home",
+        component: Home,
         meta: {
-            title: '页面1'
+            title: '首页'
         }
     }, {
-        path: "/page2",
-        name: "page2",
-        component: Page2,
+        path: "/lesson/:lesson+",
+        name: "lesson",
+        component: Lesson,
         meta: {
-            title: '页面2'
-        }
-    }, {
-        path: "/page3",
-        name: "page3",
-        component: Page3,
-        meta: {
-            title: '页面3'
-        }
-    }, {
-        path: "/page4",
-        name: "page4",
-        component: Page4,
-        meta: {
-            title: '页面4'
-        }
-    }, {
-        path: "/page5",
-        name: "page5",
-        component: Page5,
-        meta: {
-            title: '页面5'
+            title: '课程'
         }
     }
 ]
