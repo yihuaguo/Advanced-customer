@@ -1,5 +1,11 @@
 import request from '@/utils/request'
 
+export const getLessonHtml = async (id) => {
+    return await request('get', 'lesson/lessonHtml', {
+        id
+    })
+}
+
 export const getMenuList = async () => {
     return await request('get', '/lesson/list')
 }
@@ -16,8 +22,16 @@ export const getHtml = async (documentId) => {
     })
 }
 
+export const like = async (documentId) => {
+    return await request('get', '/document/like', {
+        id: documentId
+    })
+}
+
 export default {
     getMenuList,
     getDirectorListOfDocument,
-    getHtml
+    getLessonHtml,
+    getHtml,
+    like
 }

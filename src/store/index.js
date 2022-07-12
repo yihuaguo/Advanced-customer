@@ -5,6 +5,7 @@ const store = createStore({
         return {
             lesson: {
                 url: '',
+                name: '',
                 id: undefined
             },
             directoryList: [],

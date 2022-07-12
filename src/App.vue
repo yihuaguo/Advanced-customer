@@ -1,23 +1,22 @@
 <script>
 import AOS from "aos";
-import 'aos/dist/aos.css';
-import Header from '@/components/layout_components/Header.vue'
-import Footer from '@/components/layout_components/Footer.vue'
+import "aos/dist/aos.css";
+import Header from "@/components/layout_components/Header.vue";
+// import Footer from "@/components/layout_components/Footer.vue";
 
 export default {
   components: {
     Header,
-    Footer
+    // Footer,
   },
   setup() {
     AOS.init({
       duration: 1000,
-      once: true
+      once: true,
     });
-    return {}
-  }
-}
-
+    return {};
+  },
+};
 </script>
 
 <template>
@@ -28,11 +27,14 @@ export default {
 
 <style lang="less" scoped>
 /* <=992 笔记本 */
-@media screen and (max-width: 992px) {}
+@media screen and (max-width: 992px) {
+}
 
 /* <=768 平板电脑 */
-@media screen and (max-width: 768px) {}
+@media screen and (max-width: 768px) {
+}
 
 /* <= 576 移动手机 */
-@media screen and (max-width: 576px) {}
+@media screen and (max-width: 576px) {
+}
 </style>

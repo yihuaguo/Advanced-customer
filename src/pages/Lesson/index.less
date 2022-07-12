@@ -1,0 +1,148 @@
+div.documentLayout {
+  position: relative;
+
+  div.sider {
+    position: fixed;
+    width: 300px;
+    left: 0;
+    height: calc(100vh - 60px);
+    overflow-y: scroll;
+    box-sizing: border-box;
+    border-right: 1px solid rgb(220, 215, 215);
+    padding: 20px 20px 20px 0;
+    display: block;
+
+    .collapse_tabs {
+      div.ant-collapse-item {
+        font-size: 18px;
+        font-weight: 800;
+        color: #094067;
+        p {
+          font-size: 16px;
+          font-weight: 600;
+          color: #5f6c7b;
+          padding-left: 20px;
+          cursor: pointer;
+          margin: 10px 0;
+          &:hover,
+          &.active {
+            color: #094067;
+          }
+          &:first-child {
+            margin-top: 0;
+          }
+        }
+      }
+    }
+  }
+
+  div.content {
+    position: relative;
+    margin-left: 300px;
+    min-height: calc(100vh - 60px);
+    overflow: hidden;
+    padding: 20px 20px 60px 20px;
+
+    span.expand {
+      position: fixed;
+      display: none;
+      left: 0;
+      top: 50%;
+      margin-top: -15px;
+    }
+
+    div.footerInfo {
+      width: calc(100% - 300px);
+      position: fixed;
+      bottom: 0;
+      border-top-right-radius: 20px;
+      border-top-left-radius: 20px;
+      z-index: 99;
+      display: flex;
+      background: #d8eefe;
+      margin-left: -20px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 5px 20px;
+      & > div {
+        & > span:last-child {
+          margin-left: 20px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+.expandDrawer {
+  padding-left: 0;
+  .collapse_tabs {
+    div.ant-collapse-item {
+      font-size: 18px;
+      font-weight: 800;
+      color: #094067;
+      p {
+        font-size: 16px;
+        font-weight: 600;
+        color: #5f6c7b;
+        padding-left: 20px;
+        cursor: pointer;
+        margin: 10px 0;
+        &:hover,
+        &.active {
+          color: #094067;
+        }
+        &:first-child {
+          margin-top: 0;
+        }
+      }
+    }
+  }
+}
+
+@media screen and(max-width: 900px) {
+  div.documentLayout {
+    div.sider {
+      display: none;
+    }
+    div.content {
+      margin-left: 0;
+      padding-bottom: 80px;
+      span.expand {
+        display: block;
+        width: 20px;
+        height: 40px;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        background: rgb(255, 255, 255);
+        opacity: 0.5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &:hover {
+          transition: all 0.5s;
+          opacity: 1;
+          box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014,
+            0 9px 28px 8px #0000000d;
+        }
+        .icon {
+          font-size: 30px;
+        }
+      }
+      div.footerInfo {
+        width: 100%;
+        position: absolute;
+      }
+    }
+  }
+}
+
+@media screen and(max-width: 500px) {
+  div.documentLayout {
+    div.content {
+      div.footerInfo {
+        flex-direction: column;
+      }
+    }
+  }
+}

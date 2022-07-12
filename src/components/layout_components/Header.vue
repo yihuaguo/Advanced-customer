@@ -1,71 +1,144 @@
 <template>
   <header>
-    <div class="logoBox">
-      <BookOutlined class="icon" data-aos="fade-down" data-aos-duration="600" />
-      <!-- <span data-aos="fade-down" data-aos-duration="800">前端面试指南</span> -->
-      <span data-aos="fade-down" data-aos-duration="800">指南</span>
+    <div class="logoBox" @click="goHome">
+      <BookOutlined class="icon" data-aos="fade-down" data-aos-duration="800" />
+      <span data-aos="fade-down" data-aos-duration="1000"
+        >前端工程师培养计划</span
+      >
     </div>
-    <ul v-if="menuList.length > 0">
-      <li v-for="item, index of menuList" :key="item.id" @click="handleLesson(item.url, item.id)" data-aos="fade-left"
-        :data-aos-delay="(index + 1) * 50" data-aos-duration="1000">{{ item.name }}
+    <ul>
+      <li
+        v-for="(item, index) of menu"
+        :key="item.id"
+        data-aos="fade-left"
+        @click="selectLesson(item)"
+        :data-aos-delay="(index + 1) * 50"
+        data-aos-duration="1000"
+      >
+        <a :class="{ active: item.id === $store.state.lesson.id }">{{
+          item.name || ""
+        }}</a>
+      </li>
+      <li data-aos="fade-left" :data-aos-delay="350" data-aos-duration="1000">
+        <a-dropdown>
+          <a>其他</a>
+          <template #overlay>
+            <a-menu>
+              <a-menu-item>
+                <a href="javascript:;">关于我</a>
+              </a-menu-item>
+            </a-menu>
+          </template>
+        </a-dropdown>
       </li>
     </ul>
-    <LineLoading v-else />
+    <svg-icon class="menu" name="menu" @click="visible = true" />
   </header>
+  <a-drawer
+    v-model:visible="visible"
+    class="menuDrawer"
+    title=" "
+    placement="right"
+    :closable="false"
+    width="200"
+  >
+    <ul>
+      <li v-for="item of menu" :key="item.id" @click="selectLesson(item)">
+        <a :class="{ active: item.id === $store.state.lesson.id }">{{
+          item.name || ""
+        }}</a>
+      </li>
+      <li><a>其他</a></li>
+    </ul>
+  </a-drawer>
 </template>
 
 <script>
-import {
-  BookOutlined
-} from '@ant-design/icons-vue';
-import { getMenuList } from '@/services/global'
-import { onMounted, ref } from 'vue'
-import { notice } from '@/utils/utils'
-import { useStore } from 'vuex'
-import { useRouter } from "vue-router"
-import LineLoading from '../base_components/lineLoading.vue';
+import { BookOutlined } from "@ant-design/icons-vue";
+import { watch, computed, ref } from "vue";
+import { useStore } from "vuex";
+import { useRouter, useRoute } from "vue-router";
+import menu from "@/config/menu";
+import { FireOutlined } from "@ant-design/icons-vue";
 
 export default {
   components: {
     BookOutlined,
-    LineLoading
+    FireOutlined,
   },
   setup() {
+    const store = useStore();
+    const router = useRoute();
+    const routers = useRouter();
+    const visible = ref(false);
 
-    const store = useStore()
-    const routers = useRouter()
-    const menuList = ref([])
+    const currentPath = computed(() => router.path);
 
-    const handleLesson = (url, id) => {
-      if (id === store.state.lesson.id) return
-      routers.push(`/lesson${url}`)
-      store.commit('setLesson', { url, id })
-    }
-
-    onMounted(() => {
-      getMenuList().then(res => {
-        menuList.value = res || []
-        if (res && res.length > 0) {
-          const { url, id } = res[0]
-          handleLesson(url, id)
+    watch(currentPath, (path = "") => {
+      if (path === "/") {
+        store.commit("setLesson", {
+          url: "",
+          name: "",
+          id: undefined,
+        });
+      }
+      const pathList = path.split("/");
+      pathList.map((item, index) => {
+        if (item === "lesson") {
+          if (pathList[index + 1]) {
+            // 当前路由对象
+            const currentMenu = menu.find(
+              (item) => item.url === `/${pathList[index + 1]}`
+            );
+            if (!currentMenu) {
+              routers.push("/404");
+              return;
+            }
+            selectLesson(currentMenu);
+          } else {
+            routers.push("/404");
+          }
         }
-      }).catch(() => {
-        notice('warning', '请求错误', '菜单获取错误，请刷新网站或者联系管理员！')
-      })
+      });
     });
 
-    return {
-      menuList,
-      handleLesson
+    // 选择课程
+    const selectLesson = (currentLesson) => {
+      const { url, id, name } = currentLesson;
+      if (currentLesson.id === store.state.lesson.id) return;
+      if (url === "/other") {
+        return;
+      }
+      if (visible.value) {
+        visible.value = false
+      }
+      store.commit("setLesson", { id, name, url });
+      const pushPath = `/lesson${url}`;
+      if (pushPath !== router.path) {
+        routers.push(pushPath);
+      }
     };
-  }
+
+    const goHome = () => {
+      if (router.path === "/") return;
+      window.scroll(0, 0);
+      routers.push("/");
+    };
+
+    return {
+      menu,
+      visible,
+      goHome,
+      selectLesson,
+    };
+  },
 };
 </script>
 
 <style lang="less" scoped>
 header {
   padding: 0 20px;
-  height: 80px;
+  height: 60px;
   box-shadow: 0 2px 8px #f0f1f2;
   background-color: #d8eefe;
   display: flex;
@@ -95,11 +168,10 @@ header {
 
   ul {
     list-style: none;
+    display: block;
 
-    &>li {
+    & > li {
       float: left;
-      font-size: 20px;
-      font-weight: 800;
       margin: 0 10px;
       cursor: pointer;
       transition: all 0.3s;
@@ -108,12 +180,73 @@ header {
         margin-right: 0;
       }
 
-      &:hover,
-      &.current {
-        color: #3da9fc;
+      & > a {
+        font-size: 20px;
+        font-weight: 800;
+        color: #0a4067;
+        &:hover,
+        &.current,
+        &.active {
+          color: #3da9fc;
+        }
       }
     }
   }
 
+  & > svg.menu {
+    display: none;
+  }
+}
+
+.menuDrawer {
+  ul {
+    list-style: none;
+    font-size: 20px;
+    font-weight: 600;
+    color: #0a4067;
+    & > li {
+      margin: 5px 0;
+      & > a {
+        &:hover,
+        &.current,
+        &.active {
+          color: #3da9fc;
+        }
+      }
+    }
+  }
+}
+
+@media screen and(max-width: 900px) {
+  header {
+    height: 50px;
+    div.logoBox {
+      .icon {
+        font-size: 40px;
+      }
+    }
+    div.logoBox {
+      .icon {
+        display: block;
+      }
+    }
+    ul {
+      display: none;
+    }
+    & > svg.menu {
+      display: block;
+      font-size: 40px;
+    }
+  }
+}
+
+@media screen and(max-width: 500px) {
+  header {
+    div.logoBox {
+      span {
+        display: none;
+      }
+    }
+  }
 }
 </style>

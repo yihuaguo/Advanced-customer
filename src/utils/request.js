@@ -1,4 +1,5 @@
 import axios from 'axios'
+import nprogress from "nprogress";
 
 const service = axios.create({
     baseURL: '/api',
@@ -8,6 +9,7 @@ const service = axios.create({
 service.interceptors.request.use(
     // 统一请求前处理
     config => {
+        nprogress.start()
         return config
     },
     error => {
@@ -18,10 +20,13 @@ service.interceptors.request.use(
 service.interceptors.response.use(
     // 统一返回数据处理
     response => {
+        nprogress.done()
         return response.data
     },
     error => {
+        nprogress.done()
         console.log('response error', error)
+        return Promise.reject(new Error(error))
     }
 )
 

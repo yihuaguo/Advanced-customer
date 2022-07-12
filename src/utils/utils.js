@@ -7,6 +7,10 @@ export const notice = (type = 'info', message = '', description = '') => {
     });
 }
 
+export const isNullObj = (val) => JSON.stringify(val) === '{}';
+
+
 export default {
-    notice
+    notice,
+    isNullObj
 }

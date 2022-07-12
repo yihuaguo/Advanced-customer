@@ -1,0 +1,127 @@
+div.home {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  flex-direction: column;
+  min-height: calc(100vh - 60px);
+  .banner {
+    margin-top: 100px;
+    transition: all 0.5s;
+    font-size: 200px;
+    &:hover {
+      transform: translateY(-10px);
+    }
+  }
+  h1 {
+    margin-top: 20px;
+    color: #0a4067;
+  }
+  ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 900px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+    & > li {
+      width: 30%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      flex-direction: column;
+      margin: 20px 0;
+      font-weight: 600;
+      padding: 30px;
+      min-height: 260px;
+      text-align: center;
+      border-radius: 15px;
+      cursor: pointer;
+      & > svg {
+        font-size: 60px;
+        margin-bottom: 15px;
+      }
+      &:hover {
+        transition: all 0.5s;
+        box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014,
+          0 9px 28px 8px #0000000d;
+        & > svg {
+          transition: all 0.5s;
+          transform: scale(1.1);
+        }
+      }
+      & > span.title {
+        margin-bottom: 15px;
+        font-size: 20px;
+      }
+    }
+  }
+  footer {
+    padding: 10px 0;
+    background: #0a4067;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    & > div:first-child {
+      margin-bottom: 5px;
+      color: #ffffff;
+      & > p > a {
+        color: #ffffff;
+        margin: 0 10px;
+        &:hover {
+          border-bottom: 1px solid rgb(165, 156, 156);
+        }
+      }
+    }
+    & > div:last-child {
+      .icons {
+        cursor: pointer;
+        font-size: 20px;
+        color: #ffffff;
+      }
+    }
+  }
+}
+
+@media screen and(max-width: 900px) {
+  div.home {
+    h1 {
+      text-align: center;
+    }
+    ul {
+      padding: 0 20px;
+      justify-content: center;
+      width: 100%;
+      & > li {
+        width: 45%;
+        margin-bottom: 0;
+      }
+    }
+    footer {
+      & > div:first-child {
+        text-align: center;
+      }
+    }
+  }
+}
+
+@media screen and(max-width: 500px) {
+  div.home {
+    .banner {
+      margin-top: 40px;
+      font-size: 100px;
+    }
+    h1 {
+      font-size: 22px;
+    }
+    ul {
+      & > li {
+        width: 100%;
+        min-height: 0;
+      }
+    }
+  }
+}

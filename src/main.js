@@ -8,6 +8,7 @@ import router from './router'
 import i18n from './config/i18n'
 import svgIcon from './components/base_components/SvgIcon.vue'
 import 'virtual:svg-icons-register'
+import "nprogress/nprogress.css";
 import 'ant-design-vue/dist/antd.less'
 import './styles/default.css'
 
